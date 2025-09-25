@@ -1,0 +1,29 @@
+- name: Enviar mensajes a los contenedores y guardarlos en log
+  hosts: localhost
+  tasks:
+    - name: Mandar mensaje a container1
+      community.docker.docker_container_exec:
+        container: container1
+        command: sh -c 'echo "Hola desde Ansible a container1" >> /tmp/mensajes.log'
+      register: msg1
+
+    - debug:
+        msg: "Mensaje enviado a container1 y guardado en /tmp/mensajes.log"
+
+    - name: Mandar mensaje a container2
+      community.docker.docker_container_exec:
+        container: container2
+        command: sh -c 'echo "Hola desde Ansible a container2" >> /tmp/mensajes.log'
+      register: msg2
+
+    - debug:
+        msg: "Mensaje enviado a container2 y guardado en /tmp/mensajes.log"
+
+    - name: Mandar mensaje a container3
+      community.docker.docker_container_exec:
+        container: container3
+        command: sh -c 'echo "Hola desde Ansible a container3" >> /tmp/mensajes.log'
+      register: msg3
+
+    - debug:
+        msg: "Mensaje enviado a container3 y guardado en /tmp/mensajes.log"

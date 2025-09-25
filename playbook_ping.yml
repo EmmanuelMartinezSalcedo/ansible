@@ -1,0 +1,29 @@
+- name: Hacer ping a los contenedores locales
+  hosts: localhost
+  tasks:
+    - name: Ping container1
+      community.docker.docker_container_exec:
+        container: container1
+        command: ping -c 1 127.0.0.1
+      register: ping1
+
+    - debug:
+        msg: "container1 ping result: {{ ping1.stdout }}"
+
+    - name: Ping container2
+      community.docker.docker_container_exec:
+        container: container2
+        command: ping -c 1 127.0.0.1
+      register: ping2
+
+    - debug:
+        msg: "container2 ping result: {{ ping2.stdout }}"
+
+    - name: Ping container3
+      community.docker.docker_container_exec:
+        container: container3
+        command: ping -c 1 127.0.0.1
+      register: ping3
+
+    - debug:
+        msg: "container3 ping result: {{ ping3.stdout }}"
